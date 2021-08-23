@@ -1,9 +1,15 @@
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
-import React from "react"
+import React, { useState } from "react"
 import "bootstrap/dist/css/bootstrap.css";
 import "./Navbar.css";
 
-function Nav2() {
+function Nav2({newMemberForm, setNewMembwrForm}) {
+  
+  function popUpForm(e){
+    e.preventDefault()
+    setNewMembwrForm(!newMemberForm)
+  }
+  
   return (
     <>
       {" "}
@@ -30,7 +36,7 @@ function Nav2() {
               <Nav className="me-auto">
                 <Nav.Link href="#features">About Us</Nav.Link>
                 <Nav.Link href="#pricing">Events</Nav.Link>
-
+                
                 <NavDropdown
                   title="More"
                   id="collasible-nav-dropdown"
@@ -45,11 +51,11 @@ function Nav2() {
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                 </NavDropdown>
+                <Nav.Link href="#features">Contact Us</Nav.Link>
               </Nav>
               <Nav>
-                <Nav.Link href="#deets">Contact Us</Nav.Link>
                 <Nav.Link eventKey={2} href="#memes">
-                  Become a member
+                  <button className="btn btn-warning" onClick={popUpForm}>Become a member</button> 
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>

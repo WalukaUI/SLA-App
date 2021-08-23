@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -14,15 +14,20 @@ import Navbar from "./NavBar/Navbar"
 import Events from "./Events/Events";
 import flag from "../Images&Vedios/flag.mp4"
 import Footer from "./Footer/Footer";
+import BecomeAmem from "./BecomeAmemberForm/BecomeAmember"
 
 function MainBody() {
+
+  const[newMemberForm, setNewMembwrForm]=useState(false)
+
+
   return (
     <div className="Login-component">
           <video className="videoTag" autoPlay loop muted>
       <source src={flag} type="video/mp4" />
     </video>
       <Router>
-      <Navbar />
+      <Navbar newMemberForm={newMemberForm} setNewMembwrForm={setNewMembwrForm}/>
       <div className="row">
         <div className=" col-xl-4 col-md-4  mainDiv1">
         <Events />
@@ -44,10 +49,10 @@ function MainBody() {
             <Redirect to="/" />
           </Switch>
         </div>
+
       </div>
-      
-       
       </Router>
+      <BecomeAmem newMemberForm={newMemberForm} setNewMembwrForm={setNewMembwrForm}/>
       <Footer />
     </div>
   );
