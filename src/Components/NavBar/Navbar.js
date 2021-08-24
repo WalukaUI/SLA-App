@@ -1,18 +1,17 @@
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
-import React, { useState } from "react"
+import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Navbar.css";
+import BecomeAmem from "../BecomeAmemberForm/BecomeAmember";
 
-function Nav2({newMemberForm, setNewMembwrForm}) {
-  
-  function popUpForm(e){
-    e.preventDefault()
-    setNewMembwrForm(!newMemberForm)
+function Nav2({ newMemberForm, setNewMembwrForm }) {
+  function popUpForm(e) {
+    e.preventDefault();
+    setNewMembwrForm(!newMemberForm);
   }
-  
+
   return (
     <>
-      {" "}
       <div className="navDiv">
         <Navbar
           collapseOnSelect
@@ -22,27 +21,29 @@ function Nav2({newMemberForm, setNewMembwrForm}) {
           className="navbar2"
         >
           <Container>
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/">
               <img
                 src="../img/logo.jpg"
                 alt="SLA Logo"
                 className="logoImageNav2"
-              />{" "}
+              />
               SRI LANKA ASSOCIATION
             </Navbar.Brand>
 
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="#features">About Us</Nav.Link>
-                <Nav.Link href="#pricing">Events</Nav.Link>
-                
+                <Nav.Link href="/about">About Us</Nav.Link>
+                <Nav.Link href="/events">Events</Nav.Link>
+
                 <NavDropdown
                   title="More"
                   id="collasible-nav-dropdown"
                   menuVariant="dark"
                 >
-                  <NavDropdown.Item href="#action/3.1">Photo Gallery</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.1">
+                    Photo Gallery
+                  </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">
                     committee Members
                   </NavDropdown.Item>
@@ -51,13 +52,11 @@ function Nav2({newMemberForm, setNewMembwrForm}) {
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                 </NavDropdown>
-                <Nav.Link href="#features">Contact Us</Nav.Link>
+                <Nav.Link href="/contact">Contact Us</Nav.Link>
               </Nav>
-              <Nav>
-                <Nav.Link eventKey={2} href="#memes">
-                  <button className="btn btn-warning" onClick={popUpForm}>Become a member</button> 
-                </Nav.Link>
-              </Nav>
+              <Nav.Link href="/create">
+                <button className="btn btn-warning">Become a Member</button>
+              </Nav.Link>
             </Navbar.Collapse>
           </Container>
         </Navbar>

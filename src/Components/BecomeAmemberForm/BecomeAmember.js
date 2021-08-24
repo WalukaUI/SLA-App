@@ -1,32 +1,42 @@
 import React, { useState } from "react";
+import { Nav } from "react-bootstrap";
 import "./BecomeAmember.css";
+import axios from "axios";
 
-function BecomeAmem({ newMemberForm, setNewMembwrForm }) {
+function BecomeAmem() {
   const [member, setMember] = useState(null);
+  const [newMemberForm, setNewMembwrForm] = useState(true);
 
-  function togglePopup(e) {
+
+  function createNewMember(e) {
     e.preventDefault();
+    console.log(member);
     setNewMembwrForm(!newMemberForm);
+    const newPerson = {
+      firstname: member.firstname,
+      lastname: member.lastname,
+      username: member.username,
+      streetandcity: member.streetandcity,
+      state: member.state,
+      zip: member.zip,
+      email: member.email,
+      contactnumber: member.contactnumber
+    };
+    axios.post("http://localhost:3001/create", newPerson);
   }
 
   function handleChangeData(e) {
     e.preventDefault();
     let newData = { ...member, [e.target.name]: e.target.value };
     setMember(newData);
-    
   }
 
-  function updatePlayerHandler(e) {
-    e.preventDefault();
-    console.log(member);
-    setNewMembwrForm(!newMemberForm);
-  }
   return newMemberForm ? (
     <>
-      <div className="popup-box">
+      <div>
         <div className="popup-inner">
           <div className="formDiv div1">
-            <form onSubmit={updatePlayerHandler}>
+            <form onSubmit={createNewMember}>
               <h4>Become a New Member of SLA</h4>
               <div className="form-group row">
                 <div className="form-row">
@@ -91,7 +101,7 @@ function BecomeAmem({ newMemberForm, setNewMembwrForm }) {
                       name="streetandcity"
                       className="form-control"
                       id="validationCustom03"
-                      placeholder="City"
+                      placeholder="# Street Name, City Name"
                       required
                       onChange={handleChangeData}
                     />
@@ -118,7 +128,7 @@ function BecomeAmem({ newMemberForm, setNewMembwrForm }) {
                     <label>Zip</label>
                     <input
                       type="number"
-                      name="zipcode"
+                      name="zip"
                       className="form-control"
                       id="validationCustom05"
                       placeholder="Zip"
@@ -157,14 +167,20 @@ function BecomeAmem({ newMemberForm, setNewMembwrForm }) {
                 <div className="container">
                   <div className="row">
                     <div className="col-sm">
-                      <button className=" btn btn-success" type="submit">
+                      <button
+                        className=" btn btn-success submitBtn"
+                        type="submit"
+                      >
                         Submit
                       </button>
                     </div>
                     <div className="col-sm">
-                      <button className="btn btn-danger" onClick={togglePopup}>
+                      <Nav.Link
+                        href="/"
+                        className=" btn btn-danger formCancelBtn"
+                      >
                         Cancel
-                      </button>
+                      </Nav.Link>
                     </div>
                     <div className="col-sm"></div>
                   </div>
@@ -176,7 +192,14 @@ function BecomeAmem({ newMemberForm, setNewMembwrForm }) {
       </div>
     </>
   ) : (
-    <div>{""}</div>
+    <div className="popup-box">
+      <div className="popup-inner thankYouPopup">
+        <h4>Thank you</h4>
+        <Nav.Link href="/" className=" btn btn-danger canclePopup">
+          X
+        </Nav.Link>
+      </div>
+    </div>
   );
 }
 
